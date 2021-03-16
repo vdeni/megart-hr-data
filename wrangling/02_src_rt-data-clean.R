@@ -282,6 +282,8 @@ d_wave1 %<>%
                   'string' = rijec,
                   'block_no' = block,
                   'block_name' = blok,
+                  'block_order' = ab,
+                  'id' = name,
                   'string_type' = vrsta_rijeci)
 
 names(d_wave1) %<>%
@@ -318,7 +320,7 @@ d_wave1$handedness <- dplyr::case_when(d_wave1$handedness == 'desna' ~ 'right',
                                        d_wave1$handedness == 'lijeva' ~ 'left')
 
 # block order
-d_wave1$ab %<>%
+d_wave1$block_order %<>%
     stringr::str_replace(.,
                          'pa', 'then')
 
@@ -329,6 +331,8 @@ d_wave2 %<>%
                   'string' = rijec,
                   'block_no' = block,
                   'block_name' = blok,
+                  'block_order' = ab,
+                  'id' = name,
                   'string_type' = vrsta_rijeci)
 
 names(d_wave2) %<>%
@@ -364,7 +368,7 @@ d_wave2$handedness <- dplyr::case_when(d_wave2$handedness == 'desna' ~ 'right',
                                        d_wave2$handedness == 'lijeva' ~ 'left')
 
 # translate block order to english
-d_wave2$ab %<>%
+d_wave2$block_order %<>%
     stringr::str_replace(.,
                          'pa', 'then')
 
