@@ -1,13 +1,14 @@
-# import raw reaction time data, and clean it
+# import anonymized reaction time data, and clean it
 library(dplyr)
 library(magrittr)
 library(conflicted)
 library(here)
 library(janitor)
 library(readr)
+library(stringr)
 
-# read in first wave
-d_wave1 <- readr::read_csv(here::here('data', 'reaction-time',
+# read in data from the first wave
+d_wave1 <- readr::read_csv(here::here('data',
                                       '03_dat_c_reaction-times_1.csv'),
                            col_types = cols(ExperimentName = col_skip(),
                                             Subject = col_integer(),
@@ -123,8 +124,8 @@ d_wave1 <- readr::read_csv(here::here('data', 'reaction-time',
                                             TO = col_integer(),
                                             VrstaRijeci = col_character()))
 
-# read in the second wave
-d_wave2 <- readr::read_csv(here::here('data', 'reaction-time',
+# read in data from the second wave
+d_wave2 <- readr::read_csv(here::here('data',
                                       '04_dat_c_reaction-times_2.csv'),
                            col_types = cols(ExperimentName = col_skip(),
                                             Subject = col_integer(),
@@ -259,29 +260,106 @@ d_wave2 <- readr::read_csv(here::here('data', 'reaction-time',
                                             VrstaRijeci = col_character()),
                            na = c('', 'na', 'NA'))
 
-# clean variable names
-d_wave1 %<>% janitor::clean_names(.)
+# clean variable names; convert to snake_case
+d_wave1 %<>%
+    janitor::clean_names(.)
 
-d_wave2 %<>% janitor::clean_names(.)
+d_wave2 %<>%
+    janitor::clean_names(.)
 
-# select columns relevant for analysis
-d_wave1 %<>% dplyr::select(.,
-                           name, session, age, sex,
-                           podrazaj_rt, rijec, vrsta_rijeci) %>%
+# translate variable names to english
+# wave 1
+d_wave1 %<>%
     dplyr::rename(.,
                   'stimulus_rt' = podrazaj_rt,
                   'string' = rijec,
+                  'block_no' = block,
+                  'block_name' = blok,
                   'string_type' = vrsta_rijeci)
 
+names(d_wave1) %<>%
+    stringr::str_replace_all(.,
+                             'podrazaj', 'stimulus') %>%
+    stringr::str_replace_all(.,
+                             'koji', 'which') %>%
+    stringr::str_replace_all(.,
+                             'blok', 'block') %>%
+    stringr::str_replace_all(.,
+                             'lista', 'list')
+
+d_wave1 %<>%
+    dplyr::rename(.,
+                  'end_device' = kraj_device,
+                  'instructions_device' = uputa_device,
+                  'go_when_ready_device' = kreni_kad_hoces_device,
+                  'corect_response' = to,
+                  'small_block' = mali_block)
+
+# translate variable values to english
+# sex
+d_wave1$sex <- dplyr::case_when(d_wave1$sex == 'Ž' ~ 'f',
+                                d_wave1$sex == 'M' ~ 'm')
+
+# string type
+d_wave1$string_type <- dplyr::case_when(d_wave1$string_type == 'pseudorijec' ~
+                                           'pseudoword',
+                                        d_wave1$string_type == 'rijec' ~
+                                           'word')
+
+# handedness
+d_wave1$handedness <- dplyr::case_when(d_wave1$handedness == 'desna' ~ 'right',
+                                       d_wave1$handedness == 'lijeva' ~ 'left')
+
+# block order
+d_wave1$ab %<>%
+    stringr::str_replace(.,
+                         'pa', 'then')
+
+# wave 2
+d_wave2 %<>%
+    dplyr::rename(.,
+                  'stimulus_rt' = podrazaj_rt,
+                  'string' = rijec,
+                  'block_no' = block,
+                  'block_name' = blok,
+                  'string_type' = vrsta_rijeci)
+
+names(d_wave2) %<>%
+    stringr::str_replace_all(.,
+                             'podrazaj', 'stimulus') %>%
+    stringr::str_replace_all(.,
+                             'koji', 'which') %>%
+    stringr::str_replace_all(.,
+                             'blok', 'block') %>%
+    stringr::str_replace_all(.,
+                             'lista', 'list')
+
+d_wave2 %<>%
+    dplyr::rename(.,
+                  'end_device' = kraj_device,
+                  'instructions_device' = uputa_device,
+                  'go_when_ready_device' = kreni_kad_hoces_device,
+                  'corect_response' = to,
+                  'small_block' = mali_block)
+
 # translate sex to english
-d_wave1$sex <- case_when(d_wave1$sex == 'Ž' ~ 'f',
-                         d_wave1$sex == 'M' ~ 'm')
+d_wave2$sex <- dplyr::case_when(d_wave2$sex == 'Ž' ~ 'f',
+                                d_wave2$sex == 'M' ~ 'm')
 
 # translate string type to english
-d_wave1$string_type <- case_when(d_wave1$string_type == 'pseudorijec' ~
-                                    'pseudoword',
-                                 d_wave1$string_type == 'rijec' ~
-                                    'word')
+d_wave2$string_type <- dplyr::case_when(d_wave2$string_type == 'pseudorijec' ~
+                                           'pseudoword',
+                                        d_wave2$string_type == 'rijec' ~
+                                           'word')
+
+# translate handedness to english
+d_wave2$handedness <- dplyr::case_when(d_wave2$handedness == 'desna' ~ 'right',
+                                       d_wave2$handedness == 'lijeva' ~ 'left')
+
+# translate block order to english
+d_wave2$ab %<>%
+    stringr::str_replace(.,
+                         'pa', 'then')
 
 # select columns relevant for analysis
 d_wave2 %<>% select(.,
