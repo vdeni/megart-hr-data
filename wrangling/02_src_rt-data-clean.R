@@ -360,22 +360,3 @@ d_wave2$handedness <- dplyr::case_when(d_wave2$handedness == 'desna' ~ 'right',
 d_wave2$ab %<>%
     stringr::str_replace(.,
                          'pa', 'then')
-
-# select columns relevant for analysis
-d_wave2 %<>% select(.,
-                    name, session, age, sex,
-                    podrazaj_rt, rijec, vrsta_rijeci) %>%
-    rename(.,
-           'stimulus_rt' = podrazaj_rt,
-           'string' = rijec,
-           'string_type' = vrsta_rijeci)
-
-# translate sex to english
-d_wave2$sex <- case_when(d_wave2$sex == 'Ž' ~ 'f',
-                         d_wave2$sex == 'M' ~ 'm')
-
-# translate string type to english
-d_wave2$string_type <- case_when(d_wave2$string_type == 'pseudoriječ' ~
-                                    'pseudoword',
-                                 d_wave2$string_type == 'riječ' ~
-                                    'word')
