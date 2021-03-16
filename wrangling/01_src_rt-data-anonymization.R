@@ -273,11 +273,13 @@ d_wave2 <- readr::read_csv(here::here('data',
                     na = c('', 'na', 'NULL'))
 
 # normalize participant names
-d_wave1$Name %<>% stringr::str_to_lower(.) %>%
+d_wave1$Name %<>%
+    stringr::str_to_lower(.) %>%
     stringr::str_trim(.) %>%
     chartr('šđčćž', 'sdccz', x = .)
 
-d_wave2$Name %<>% stringr::str_to_lower(.) %>%
+d_wave2$Name %<>%
+    stringr::str_to_lower(.) %>%
     stringr::str_trim(.) %>%
     chartr('šđčćž', 'sdccz', x = .)
 
@@ -300,19 +302,22 @@ d_wave1 %<>%
 
 d_wave1$Name <- d_wave1_aliases
 
-d_wave1 %<>% tidyr::unnest(.,
-                           cols = 'data')
+d_wave1 %<>%
+    tidyr::unnest(.,
+                  cols = 'data')
 
-d_wave2 %<>% group_by(.,
-                      Name) %>%
+d_wave2 %<>%
+    group_by(.,
+             Name) %>%
     tidyr::nest(.) %>%
     # exclude subject with invalid data
     {.[-3, ]}
 
 d_wave2$Name <- d_wave2_aliases
 
-d_wave2 %<>% tidyr::unnest(.,
-                           cols = 'data')
+d_wave2 %<>%
+    tidyr::unnest(.,
+                  cols = 'data')
 
 # write out
 readr::write_csv(d_wave1, here::here('data',
