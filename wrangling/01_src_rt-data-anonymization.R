@@ -7,8 +7,8 @@ library(here)
 library(readr)
 library(stringr)
 
-# read in first wave
-d_wave1 <- readr::read_csv(here::here('data', 'reaction-time',
+# read in data from the first wave
+d_wave1 <- readr::read_csv(here::here('data',
                                       '01_dat_r_reaction-times_1.csv'),
                            col_types = cols(ExperimentName = col_character(),
                                             Subject = col_integer(),
@@ -127,8 +127,8 @@ d_wave1 <- readr::read_csv(here::here('data', 'reaction-time',
                                             TO = col_integer(),
                                             VrstaRijeci = col_character()))
 
-# read in second wave
-d_wave2 <- readr::read_csv(here::here('data', 'reaction-time',
+# read in data from the second wave
+d_wave2 <- readr::read_csv(here::here('data',
                                       '02_dat_r_reaction-times_2.csv'),
                             col_types = cols(ExperimentName = col_character(),
                                              Subject = col_integer(),
@@ -274,12 +274,14 @@ d_wave2 <- readr::read_csv(here::here('data', 'reaction-time',
 
 # normalize participant names
 d_wave1$Name %<>% stringr::str_to_lower(.) %>%
+    stringr::str_trim(.) %>%
     chartr('šđčćž', 'sdccz', x = .)
 
 d_wave2$Name %<>% stringr::str_to_lower(.) %>%
+    stringr::str_trim(.) %>%
     chartr('šđčćž', 'sdccz', x = .)
 
-# create aliases
+# create aliases for participants
 d_wave1_aliases <- paste0('A_',
                           sprintf(fmt = '%02i',
                                   1:(length(unique(d_wave1$Name))-1)))
@@ -313,7 +315,7 @@ d_wave2 %<>% tidyr::unnest(.,
                            cols = 'data')
 
 # write out
-readr::write_csv(d_wave1, here::here('data', 'reaction-time',
+readr::write_csv(d_wave1, here::here('data',
                                      '03_dat_c_reaction-times_1.csv'))
-readr::write_csv(d_wave2, here::here('data', 'reaction-time',
+readr::write_csv(d_wave2, here::here('data',
                                      '04_dat_c_reaction-times_2.csv'))
