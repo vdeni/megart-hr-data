@@ -10,22 +10,25 @@ library(stringr)
 # read in data from the first wave
 d_wave1 <- readr::read_csv(here::here('data',
                                       '03_dat_c_reaction-times_1.csv'),
-                           col_types = cols(ExperimentName = col_skip(),
+                           col_types = cols(ExperimentName = col_character(),
                                             Subject = col_integer(),
                                             Session = col_integer(),
                                             Age = col_integer(),
-                                            Chronos.BoxInfo = col_skip(),
-                                            Clock.Information = col_skip(),
-                                            DataFile.Basename = col_skip(),
-                                            Display.RefreshRate = col_skip(),
+                                            Chronos.BoxInfo = col_character(),
+                                            Clock.Information = col_character(),
+                                            DataFile.Basename = col_character(),
+                                            Display.RefreshRate =
+                                                col_character(),
                                             ExperimentVersion = col_character(),
                                             Group = col_integer(),
                                             Handedness = col_character(),
                                             Name = col_character(),
-                                            RandomSeed = col_skip(),
-                                            RuntimeCapabilities = col_skip(),
-                                            RuntimeVersion = col_skip(),
-                                            RuntimeVersionExpected = col_skip(),
+                                            RandomSeed = col_character(),
+                                            RuntimeCapabilities =
+                                                col_character(),
+                                            RuntimeVersion = col_character(),
+                                            RuntimeVersionExpected =
+                                                col_character(),
                                             SessionDate = col_character(),
                                             SessionStartDateTimeUtc =
                                                 col_character(),
@@ -127,22 +130,26 @@ d_wave1 <- readr::read_csv(here::here('data',
 # read in data from the second wave
 d_wave2 <- readr::read_csv(here::here('data',
                                       '04_dat_c_reaction-times_2.csv'),
-                           col_types = cols(ExperimentName = col_skip(),
+                           col_types = cols(ExperimentName = col_character(),
                                             Subject = col_integer(),
                                             Session = col_integer(),
                                             Age = col_integer(),
-                                            Chronos.BoxInfo = col_skip(),
-                                            Clock.Information = col_skip(),
-                                            DataFile.Basename = col_skip(),
-                                            Display.RefreshRate = col_skip(),
+                                            Chronos.BoxInfo = col_character(),
+                                            Clock.Information = col_character(),
+                                            DataFile.Basename =
+                                                col_character(),
+                                            Display.RefreshRate =
+                                                col_character(),
                                             ExperimentVersion = col_character(),
                                             Group = col_integer(),
                                             Handedness = col_character(),
                                             Name = col_character(),
-                                            RandomSeed = col_skip(),
-                                            RuntimeCapabilities = col_skip(),
-                                            RuntimeVersion = col_skip(),
-                                            RuntimeVersionExpected = col_skip(),
+                                            RandomSeed = col_character(),
+                                            RuntimeCapabilities =
+                                                col_character(),
+                                            RuntimeVersion = col_character(),
+                                            RuntimeVersionExpected =
+                                                col_character(),
                                             SessionDate = col_character(),
                                             SessionStartDateTimeUtc =
                                                 col_character(),
@@ -360,3 +367,9 @@ d_wave2$handedness <- dplyr::case_when(d_wave2$handedness == 'desna' ~ 'right',
 d_wave2$ab %<>%
     stringr::str_replace(.,
                          'pa', 'then')
+
+# overwrite anonymized data with clean data
+readr::write_csv(d_wave1, here::here('data',
+                                     '03_dat_c_reaction-times_1.csv'))
+readr::write_csv(d_wave2, here::here('data',
+                                     '04_dat_c_reaction-times_2.csv'))
