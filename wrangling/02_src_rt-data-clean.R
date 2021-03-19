@@ -358,9 +358,9 @@ d_wave2$sex <- dplyr::case_when(d_wave2$sex == 'Ž' ~ 'f',
                                 d_wave2$sex == 'M' ~ 'm')
 
 # translate string type to english
-d_wave2$string_type <- dplyr::case_when(d_wave2$string_type == 'pseudorijec' ~
+d_wave2$string_type <- dplyr::case_when(d_wave2$string_type == 'pseudoriječ' ~
                                            'pseudoword',
-                                        d_wave2$string_type == 'rijec' ~
+                                        d_wave2$string_type == 'riječ' ~
                                            'word')
 
 # translate handedness to english
