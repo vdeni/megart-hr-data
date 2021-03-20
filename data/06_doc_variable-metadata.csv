@@ -1,9 +1,14 @@
 variable,description,values
 id,Participant ID. Unique for each person. Different letters denote different data collection waves. Numbers denote participants within each wave.,Letters can be A and B. Numbers range from 1 to 49.
-experiment_name,Name of the experiment. Can be used to differentiate data collection waves.,MegaRTChronos; MegaRTChronos2
-subject,Participant’s numerical ID in the experiment. Not necessarily the same number as the one in the ID.,
-session,Which of multiple measurement sessions does the datum come from.,
-age,Participant’s age.,
-handedness,Does the participant consider themself to be right or lefthanded.,
-sex,The participant’s self-proclaimed sex.,
-stimulus_acc,Is the participant’s response correct or incorrect.,
+experiment_name,Name of the experiment. Can be used to differentiate data collection waves.,MegaRTChronos;MegaRTChronos2
+subject,Participant’s numerical ID in the experiment. Not necessarily the same number as the one in the ID.,NA
+session,Which of multiple measurement sessions does the datum come from.,1;2
+age,Participant’s age.,18 and above
+handedness,Does the participant consider themself to be right or lefthanded.,left;right
+sex,The participant’s self-proclaimed sex.,f;m
+stimulus_acc,Is the participant’s response correct or incorrect.,TRUE;FALSE
+stimulus_cresp,Button mapping to the correct answer to a stimulus.,1;5
+stimulus_resp,Button which the participant pressed.,1;5
+stimulus_rt,Reaction time to stimulus expressed in milliseconds.,Theoretically equal to or greater than zero.
+string,The stimulus string.,NA
+string_type,The type of stimulus string.,pseudoword;word
