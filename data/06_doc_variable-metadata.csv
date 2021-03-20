@@ -1,0 +1,9 @@
+variable,description,values
+id,Participant ID. Unique for each person. Different letters denote different data collection waves. Numbers denote participants within each wave.,Letters can be A and B. Numbers range from 1 to 49.
+experiment_name,Name of the experiment. Can be used to differentiate data collection waves.,MegaRTChronos; MegaRTChronos2
+subject,Participant’s numerical ID in the experiment. Not necessarily the same number as the one in the ID.,
+session,Which of multiple measurement sessions does the datum come from.,
+age,Participant’s age.,
+handedness,Does the participant consider themself to be right or lefthanded.,
+sex,The participant’s self-proclaimed sex.,
+stimulus_acc,Is the participant’s response correct or incorrect.,
