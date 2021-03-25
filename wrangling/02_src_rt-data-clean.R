@@ -372,6 +372,22 @@ d_wave2$block_order %<>%
     stringr::str_replace(.,
                          'pa', 'then')
 
+# remove data from second session for participants whose 2nd session data is
+# incomplete (wave 2)
+.id_exc <- dplyr::group_by(d_wave2, id) %>%
+    tidyr::nest(.) %>%
+    dplyr::mutate_at(.,
+                     vars(data),
+                     ~purrr::map_int(., nrow)) %>%
+    dplyr::filter(.,
+                  data == 1321) %>%
+    dplyr::pull(.,
+                id)
+
+d_wave2 %<>%
+    dplyr::filter(.,
+                  !(id == .id_exc & session == 2))
+
 # overwrite anonymized data with clean data
 readr::write_csv(d_wave1, here::here('data',
                                      '03_dat_c_reaction-times_1.csv'))

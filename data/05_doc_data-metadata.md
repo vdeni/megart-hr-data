@@ -37,7 +37,7 @@ trials).
 
 ## Participants
 
-Data from 49 psychology students (44 female), aged 18 to 25 (median = 19),
+Data from 48 psychology students (43 female), aged 18 to 25 (median = 19),
 was collected. All students were native Croatian speakers.
 
 ## Materials
@@ -51,7 +51,7 @@ multilingual pseudoword generator. Behavior Research Methods 42(3), 627-633).
 A complete list of matching words and pseudowords was randomly divided into
 two large blocks, and each large block was subdivided into 8 smaller blocks.
 Each block consisted of 101 word and 101 pseudoword (one of the 16 blocks
-had 100 words and 100 pseudowords). Each participant was shown 10 randomly
+had 102 words and 102 pseudowords). Each participant was shown 10 randomly
 selected blocks.
 
 ## Procedure
