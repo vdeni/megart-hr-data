@@ -372,6 +372,19 @@ d_wave2$block_order %<>%
     stringr::str_replace(.,
                          'pa', 'then')
 
+# renaming some variables
+d_wave1 %<>%
+    dplyr::rename(.,
+                  'block_in_session' = sub_trial,
+                  'trial_in_small_block' = log_level5,
+                  'overall_acc_in_session' = overall_acc_log_level5)
+
+d_wave2 %<>%
+    dplyr::rename(.,
+                  'block_in_session' = sub_trial,
+                  'trial_in_small_block' = log_level5,
+                  'overall_acc_in_session' = overall_acc_log_level5)
+
 # remove data from second session for participants whose 2nd session data is
 # incomplete (wave 2)
 .id_exc <- dplyr::group_by(d_wave2, id) %>%
