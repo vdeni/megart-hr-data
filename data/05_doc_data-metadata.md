@@ -1,5 +1,7 @@
 # Wave 1
 
+The data were collected in April and May 2019.
+
 ## Participants
 
 Data from 43 psychology students (32 female), aged 18 to 27 (median = 19),
@@ -41,6 +43,8 @@ the character string was displayed until a response was given. This was followed
 by a blank screen, displayed for 1000 ms.
 
 # Wave 2
+
+The data were collected in November 2019.
 
 ## Participants
 
