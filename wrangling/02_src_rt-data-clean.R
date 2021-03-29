@@ -306,8 +306,8 @@ d_wave1 %<>%
 
 # translate variable values to english
 # sex
-d_wave1$sex <- dplyr::case_when(d_wave1$sex == 'Ž' ~ 'f',
-                                d_wave1$sex == 'M' ~ 'm')
+d_wave1$sex <- dplyr::case_when(d_wave1$sex == 'Ž' ~ 'female',
+                                d_wave1$sex == 'M' ~ 'male')
 
 # string type
 d_wave1$string_type <- dplyr::case_when(d_wave1$string_type == 'pseudorijec' ~

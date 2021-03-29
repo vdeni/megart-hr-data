@@ -13,5 +13,5 @@ stimulus_rt,Reaction time to stimulus expressed in milliseconds.,Theoretically e
 string,The stimulus string.,NA
 string_type,The type of stimulus string.,pseudoword;word
 block_in_session,Ordinal number of the small block of trials within a session. See data metadata for the specific wave for more information.,See data metadata.
-trial_in_small_block,Odrinal number of the trial within a block_in_session. See data metadata for the specific wave for more information.,See data metadata.
+trial_in_small_block,Ordinal number of the trial within a block_in_session. See data metadata for the specific wave for more information.,See data metadata.
 overall_acc_in_session,The participant’s overall accuracy within the session. Calculated after each trial.,0 to 100
