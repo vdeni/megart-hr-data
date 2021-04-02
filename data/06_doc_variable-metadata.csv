@@ -3,9 +3,7 @@ id,Participant ID. Unique for each person. Different letters denote different da
 experiment_name,Name of the experiment. Can be used to differentiate data collection waves.,MegaRTChronos;MegaRTChronos2
 subject,Participant’s numerical ID in the experiment. Not necessarily the same number as the one in the ID.,NA
 session,Which of multiple measurement sessions does the datum come from.,1;2
-age,Participant’s age.,18 and above
 handedness,Does the participant consider themself to be right or lefthanded.,left;right
-sex,The participant’s self-proclaimed sex.,f;m
 stimulus_acc,Is the participant’s response correct or incorrect.,TRUE;FALSE
 stimulus_cresp,Button mapping to the correct answer to a stimulus.,1;5
 stimulus_resp,Button which the participant pressed.,1;5

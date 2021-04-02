@@ -305,9 +305,6 @@ d_wave1 %<>%
                   'small_block' = mali_block)
 
 # translate variable values to english
-# sex
-d_wave1$sex <- dplyr::case_when(d_wave1$sex == 'Ž' ~ 'female',
-                                d_wave1$sex == 'M' ~ 'male')
 
 # string type
 d_wave1$string_type <- dplyr::case_when(d_wave1$string_type == 'pseudorijec' ~
@@ -353,10 +350,6 @@ d_wave2 %<>%
                   'corect_response' = to,
                   'small_block' = mali_block)
 
-# translate sex to english
-d_wave2$sex <- dplyr::case_when(d_wave2$sex == 'Ž' ~ 'f',
-                                d_wave2$sex == 'M' ~ 'm')
-
 # translate string type to english
 d_wave2$string_type <- dplyr::case_when(d_wave2$string_type == 'pseudoriječ' ~
                                            'pseudoword',
@@ -400,6 +393,15 @@ d_wave2 %<>%
 d_wave2 %<>%
     dplyr::filter(.,
                   !(id == .id_exc & session == 2))
+
+# drop age and sex
+d_wave1 %<>%
+    dplyr::select(.,
+                  -c(sex, age))
+
+d_wave2 %<>%
+    dplyr::select(.,
+                  -c(sex, age))
 
 # overwrite anonymized data with clean data
 readr::write_csv(d_wave1, here::here('data',
